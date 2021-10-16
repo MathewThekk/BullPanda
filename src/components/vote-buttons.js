@@ -23,11 +23,7 @@ const VoteButtons = ({ post }) => {
     setVotedPosts(previousVotes);
   }, []);
 
-  const handleDisablingOfVoting = (postId) => {
-    // This function is responsible for disabling the voting button after a
-    // user has voted. Fetch the previously voted items from localStorage. See
-    // https://stackoverflow.com/a/52607524/1928724 on why we need "JSON.parse"
-    // and update the item on localStorage.
+  const saveVoteToLocalStorage = (postId) => {
     const previousVotes = votedPosts;
     previousVotes.push(postId);
 
@@ -58,7 +54,7 @@ const VoteButtons = ({ post }) => {
       createdAt: post.createdAt,
       updatedAt: date.toUTCString(),
     });
-    handleDisablingOfVoting(post.id);
+    saveVoteToLocalStorage(post.id);
 
     setVoting(false);
   };
